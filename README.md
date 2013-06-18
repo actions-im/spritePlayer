@@ -8,20 +8,20 @@ Sound sprite player, which can be very useful for mobile animations.
 #Player setup:
 The player example:
 
-  var player=new SpritePlayer({
-        sprites: {
-            sound1: { start: 0, length: 1.0},
-            sound2: { start: 1.1, length: 3.0},
-            sound3: { start: 9.1, length: 10.0},
-        },
-        soundFileName: "/test/sound/test-sound",
-        onPlay: function(e){
-                console.log("Started: " + e.sprite);
-        },
-        onEnd: function(e){
-            console.log("Ended: " + e.sprite);
-        }
-     });
+    var player=new SpritePlayer({
+          sprites: {
+              sound1: { start: 0, length: 1.0},
+              sound2: { start: 1.1, length: 3.0},
+              sound3: { start: 9.1, length: 10.0},
+          },
+          soundFileName: "/test/sound/test-sound",
+          onPlay: function(e){
+                  console.log("Started: " + e.sprite);
+          },
+          onEnd: function(e){
+              console.log("Ended: " + e.sprite);
+          }
+       });
 
 The player expects the sound file to be available in three formats: mp3, ogg, wav.
 It automatically selects the best format for the specific browser.
@@ -34,7 +34,7 @@ Each sprite is marked { start: 1.1, length: 3.0}, where start: is a start of the
 Length is the length of the sprite in seconds.
 
 ##Playing the sprite.
-player.play("sound1") will play sound1 sprite.
+  player.play("sound1") will play sound1 sprite.
 
 ##Call backs:
 
@@ -45,13 +45,13 @@ onEnd can be played everytime the sprite ends playing.
 
 
 ### Sprite specific callbacks
-player.play("shortSprite", function(e){
-            console.log("Override of onPlay callback for: " + e.sprite);
-        })
+  player.play("shortSprite", function(e){
+              console.log("Override of onPlay callback for: " + e.sprite);
+          })
         
-player.play("shortSprite", null,function(e){
-            console.log("Override of onEnd callback for: " + e.sprite);
-        })
+  player.play("shortSprite", null,function(e){
+              console.log("Override of onEnd callback for: " + e.sprite);
+          })
         
         
 
