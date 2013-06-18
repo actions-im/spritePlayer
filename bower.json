@@ -1,0 +1,17 @@
+{
+    "name": "spritePlayer",
+    "version": "0.0.2",
+    "main": "spritePlayer.js",
+    "description": "Sound sprite player, which can be very useful for mobile animations.",
+    "homepage": "https://github.com/actions/spritePlayer",
+    "license" : ["http://www.gnu.org/licenses/"],
+    "keywords": [
+        "sound",
+        "animation",
+        "sprites",
+        "mobile"
+    ],
+    "author": {
+    "name": "Sergey Zelvenskiy"
+    }
+}

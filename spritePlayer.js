@@ -27,11 +27,11 @@
         soundNode.volume=1;
         soundNode.preload="auto";
         var codecs= [{ext: "mp3", type: "audio/mpeg"},
-                      {ext: "ogg", type: "audio/ogg"},
-                      {ext: "wav", type: "audio/wav"}];
+            {ext: "ogg", type: "audio/ogg"},
+            {ext: "wav", type: "audio/wav"}];
 
         for (var i=0; i<codecs.length; i++){
-           var codec=codecs[i];
+            var codec=codecs[i];
             if (!!soundNode.canPlayType(codec.type).replace(/no/, "")){
                 soundNode.src=options.soundFileName+"."+codec.ext;
                 break;
@@ -48,11 +48,14 @@
         this._sound=soundNode;
         this.currentSprite="";
         this.isPlaying=false;
+        this.canPlay=true;
         this._onPlayDefault=options["onPlay"];
         this._onEndDefault=options["onEnd"];
 
-        soundNode.addEventListener("playing",function(e){
+        soundNode.addEventListener("play",function(e){
             this.player.isPlaying=true;
+            this.volume=1;
+            this.player._sound.currentTime=this.player._sprites[this.player.currentSprite]["start"];
             this.player._onPlay.call(this.player,{sprite: this.player.currentSprite});
         }, false);
 
@@ -77,22 +80,12 @@
         {
             if (this._sprites && this._sprites.hasOwnProperty(sprite)){
                 var player=this;
+                player._sound.pause();
                 player.currentSprite=sprite;
                 player._onPlay = onPlay || player._onPlayDefault || function(){};
                 player._onEnd = onEnd || player._onEndDefault || function(){};
-                //waiting for the audio node to initialize
-                var interval = (player._sound.readyState == 4) ? 0 : 30
-                var waitForPlay=setInterval(
-                    function(){
-                        if(player._sound.readyState === 4) {
-                            player._sound.currentTime=player._sprites[player.currentSprite]["start"];
-                            player._sound.play();
-                            clearInterval(waitForPlay);
-                        }
-                        else{
-                              console.log("waiting for audio init.");
-                        }
-                    }, interval);
+                player._sound.volume=0;
+                player._sound.play();
             }
             else
             {
